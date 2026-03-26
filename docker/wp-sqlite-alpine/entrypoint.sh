@@ -97,7 +97,7 @@ PHP
 echo "[entrypoint] Starting services"
 
 # Start PHP-FPM and Nginx
-php-fpm8 -R &
+php-fpm -R &
 NGINX_PID=$!
 nginx -g "daemon off;" &
 NGINX_PID2=$!
