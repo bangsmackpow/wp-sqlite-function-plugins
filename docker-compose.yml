@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  wp-sqlite:
+    build:
+      context: ./docker/wp-sqlite-alpine
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - /opt/docker/wp-CUSTOMER:/var/www/html
+    environment:
+      - WP_URL=http://localhost
+    restart: unless-stopped
