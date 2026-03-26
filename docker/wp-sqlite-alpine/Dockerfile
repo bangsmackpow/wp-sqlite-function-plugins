@@ -16,7 +16,9 @@ RUN apk update && apk add --no-cache \
     unzip \
     icu \
     sqlite \
-    sqlite-dev
+    sqlite-dev \
+    oniguruma \
+    oniguruma-dev
 RUN docker-php-ext-install pdo pdo_sqlite mbstring xml gd zip json
 
 # Nginx configuration and runtime directories
