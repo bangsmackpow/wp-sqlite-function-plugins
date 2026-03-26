@@ -39,7 +39,7 @@ fi
 
 # Create wp-config.php tailored for SQLite usage (via plugin) if missing
 if [ ! -f "$WP_DIR/wp-config.php" ]; then
-cat > "$WP_DIR/wp-config.php" <<'PHP'
+  cat > "$WP_DIR/wp-config.php" <<'PHP'
 <?php
 // Basic WordPress configuration with SQLite support
 define('DB_NAME', 'wordpress');
@@ -57,6 +57,14 @@ if ( !defined('ABSPATH') )
   define('ABSPATH', dirname(__FILE__) . '/');
 require_once(ABSPATH . 'wp-settings.php');
 PHP
+fi
+
+# Ensure a SQLite DB file exists for first boot (pre-create)
+DB_PATH="/var/www/html/wp-sqlite.db"
+if [ ! -f "$DB_PATH" ]; then
+  echo "[entrypoint] Creating SQLite DB at $DB_PATH for first boot"
+  mkdir -p /var/www/html
+  touch "$DB_PATH"
 fi
 
 # Install WordPress if not installed
