@@ -16,9 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libwebp-dev \
     zlib1g-dev \
     libxml2-dev \
-    libfreetype6-dev \
     libonig-dev \
     pkg-config \
+    sqlite3 \
+    libsqlite3-dev \
     libfreetype6-dev \
     && rm -rf /var/lib/apt/lists/*
 
