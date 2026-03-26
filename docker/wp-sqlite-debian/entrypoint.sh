@@ -22,15 +22,25 @@ fi
 if [ ! -f "$WP_DIR/wp-config.php" ]; then
   cat > "$WP_DIR/wp-config.php" <<'PHP'
 <?php
-define('DB_HOST', 'localhost');
 define('DB_NAME', 'wordpress');
 define('DB_USER', '');
 define('DB_PASSWORD', '');
+define('DB_HOST', 'sqlite:/var/www/html/wp-sqlite.db');
 define('WP_DEBUG', false);
 define('WP_AUTO_UPDATE_CORE', true);
 define('WP_MEMORY_LIMIT', '256M');
-require_once(__DIR__ . '/wp-settings.php');
+if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+  $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+}
+require_once(ABSPATH . 'wp-settings.php');
 PHP
+fi
+
+# Create DB if not exists
+DB_PATH="/var/www/html/wp-sqlite.db"
+if [ ! -f "$DB_PATH" ]; then
+  mkdir -p /var/www/html
+  touch "$DB_PATH"
 fi
 
 if ! wp core is-installed --path="$WP_DIR" >/dev/null 2>&1; then
@@ -44,7 +54,7 @@ if ! wp core is-installed --path="$WP_DIR" >/dev/null 2>&1; then
     --skip-email --allow-root
 fi
 
-# Install plugins (auto-update via Mu-Plugin can be added if needed)
+# Install plugins (activate)
 PLUGINS=(offload-media-lite cloudflare forminator rank-math google-site-kit smtp2go super-page-cache)
 for slug in "${PLUGINS[@]}"; do
   if ! wp plugin is-installed "$slug" --path="$WP_DIR" >/dev/null 2>&1; then

@@ -26,15 +26,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push (Debian variant)
         uses: docker/build-push-action@v4
         with:
-          context: ./docker/wp-sqlite-alpine
+          context: ./docker/wp-sqlite-debian
           push: true
           tags: |
             ghcr.io/bangsmackpow/wp-sqlite-function-plugins:latest,
             ghcr.io/bangsmackpow/wp-sqlite-function-plugins:${{ github.sha }},
-            ghcr.io/bangsmackpow/wp-sqlite-function-plugins:php8.2-alpine
+            ghcr.io/bangsmackpow/wp-sqlite-function-plugins:debian-8.2
       - name: Build and push (Debian variant)
         uses: docker/build-push-action@v4
         with:

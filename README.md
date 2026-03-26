@@ -1,4 +1,4 @@
-WordPress with SQLite (Alpine, Nginx + PHP 8.2) Docker image
+WordPress with SQLite (Debian, Nginx + PHP 8.2) Docker image
 
 Overview
 - Alpine-based image with Nginx and PHP-FPM 8.2
