@@ -7,7 +7,7 @@ ENV NGINX_PORT=80 \
     WP_ADMIN_EMAIL=admin@example.com \
     WP_URL=http://localhost
 
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     nginx \
     curl \
     bash \
@@ -27,8 +27,7 @@ RUN apk add --no-cache \
     php8-sqlite3 \
     php8-pdo \
     php8-json \
-    php8-apcu \
-    bash-procs
+    php8-apcu
 
 # Nginx configuration and runtime directories
 RUN mkdir -p /var/www/html /var/cache/nginx /run/nginx && \
