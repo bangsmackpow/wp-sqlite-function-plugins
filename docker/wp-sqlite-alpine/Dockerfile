@@ -17,7 +17,7 @@ RUN apk update && apk add --no-cache \
     icu \
     sqlite \
     sqlite-dev
-RUN docker-php-ext-install pdo pdo_sqlite sqlite3 mbstring xml gd zip json
+RUN docker-php-ext-install pdo pdo_sqlite mbstring xml gd zip json
 
 # Nginx configuration and runtime directories
 RUN mkdir -p /var/www/html /var/cache/nginx /run/nginx && \
