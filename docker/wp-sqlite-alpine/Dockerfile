@@ -21,6 +21,8 @@ RUN apk update && apk add --no-cache \
     oniguruma-dev \
     libxml2 \
     libxml2-dev \
+    libzip \
+    libzip-dev \
     pkgconfig \
     libpng \
     libpng-dev \
