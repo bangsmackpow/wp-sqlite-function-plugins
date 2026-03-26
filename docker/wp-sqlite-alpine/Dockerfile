@@ -21,7 +21,17 @@ RUN apk update && apk add --no-cache \
     oniguruma-dev \
     libxml2 \
     libxml2-dev \
-    pkgconfig
+    pkgconfig \
+    libpng \
+    libpng-dev \
+    zlib \
+    zlib-dev \
+    freetype \
+    freetype-dev \
+    libjpeg-turbo \
+    libjpeg-turbo-dev \
+    libwebp \
+    libwebp-dev
 RUN docker-php-ext-install pdo pdo_sqlite xml gd zip json
 
 # Nginx configuration and runtime directories
