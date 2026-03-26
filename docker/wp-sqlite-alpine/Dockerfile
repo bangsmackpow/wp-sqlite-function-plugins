@@ -18,8 +18,11 @@ RUN apk update && apk add --no-cache \
     sqlite \
     sqlite-dev \
     oniguruma \
-    oniguruma-dev
-RUN docker-php-ext-install pdo pdo_sqlite mbstring xml gd zip json
+    oniguruma-dev \
+    libxml2 \
+    libxml2-dev \
+    pkgconfig
+RUN docker-php-ext-install pdo pdo_sqlite xml gd zip json
 
 # Nginx configuration and runtime directories
 RUN mkdir -p /var/www/html /var/cache/nginx /run/nginx && \
