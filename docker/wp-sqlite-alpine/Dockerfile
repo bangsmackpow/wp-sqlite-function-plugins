@@ -33,8 +33,10 @@ RUN apk update && apk add --no-cache \
     libjpeg-turbo \
     libjpeg-turbo-dev \
     libwebp \
-    libwebp-dev
-RUN docker-php-ext-install pdo pdo_sqlite xml gd zip json
+  libwebp-dev \
+  && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+  && docker-php-ext-install pdo pdo_sqlite xml gd zip json \
+  && apk del .build-deps
 
 # Nginx configuration and runtime directories
 RUN mkdir -p /var/www/html /var/cache/nginx /run/nginx && \
