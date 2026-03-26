@@ -1,4 +1,5 @@
 FROM php:8.2-fpm
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV WP_ADMIN_USER=admin \
     WP_ADMIN_PASSWORD=changeme \
