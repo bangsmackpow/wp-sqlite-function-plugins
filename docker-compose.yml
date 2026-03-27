@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  wordpress:
+    build: .
+    container_name: wp-sqlite-function-plugins
+    ports:
+      - "8080:80"
+    environment:
+      - SITE_URL=http://localhost:8080
+      - SITE_TITLE=WordPress SQLite Demo
+      - WP_ADMIN_USER=admin
+      - WP_ADMIN_PASSWORD=admin12345
+      - WP_ADMIN_EMAIL=admin@example.com
+    volumes:
+      # Persist WordPress content (uploads, plugins, themes)
+      - ./data/wp-content:/var/www/html/wp-content
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "if /usr/local/bin/wp core is-installed --path=/var/www/html --allow-root >/dev/null 2>&1; then http_code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost/); if [ \"$http_code\" = \"200\" ] || [ \"$http_code\" = \"301\" ]; then exit 0; else exit 1; fi; else exit 1; fi"]
+      interval: 60s
+      timeout: 5s
+      start_period: 120s
+      retries: 3
