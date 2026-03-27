@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   wordpress:
-    build: ./docker
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
     container_name: wp-sqlite-function-plugins
     ports:
       - "8080:80"
